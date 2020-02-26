@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  mysql:
+  mysqlyourls:
     image: mysql:5.7
     env_file:
       - env.mysql
@@ -22,14 +22,16 @@ services:
     # replae "x.y.z" with "x.y.z-noadmin" for production environment
     # image: guessi/docker-yourls:1.7.4-noadmin
     image: guessi/docker-yourls:1.7.4
+    #volumes:
+      #- ./volumes/plugins:
     links:
-      - mysql:mysql
+      - mysqlyourls:mysqlyourls
     env_file:
       - env.yourls
     ports:
       - 80:80
     depends_on:
-      - mysql
+      - mysqlyourls
     logging:
       driver: json-file
       options:
